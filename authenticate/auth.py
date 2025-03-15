@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from passlib.hash import bcrypt
+
 from models.models import User
 from config.dependence import get_db
 
@@ -28,3 +29,4 @@ def login(email: str, password: str, db: Session = Depends(get_db)):
 
     token = jwt.encode({"user_id": user.id}, SECRET_KEY, algorithm="HS256")
     return {"token": token}
+
